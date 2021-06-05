@@ -5,14 +5,19 @@ import com.example.sirius.MainApplication
 import com.example.sirius.core.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
+        AndroidSupportInjectionModule::class,
         AppModule::class,
         PresenterModule::class,
-        AppDatabaseModule::class
+        AppDatabaseModule::class,
+        FragmentModule::class,
+        DeveloperNotesModule::class,
+        HttpModule::class
     ]
 )
 interface AppComponent {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sirius</string>
+    <string name="default_msg_error">При обработке данных возникла ошибка.</string>
+    <string name="default_action">Обновить</string>
 </resources>

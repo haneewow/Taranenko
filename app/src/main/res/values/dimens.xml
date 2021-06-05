@@ -5,6 +5,7 @@
     <dimen name="big_space">32dp</dimen>
 
     <dimen name="card_height">400dp</dimen>
+    <dimen name="card_width">300dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
     <dimen name="card_corner_radius">16dp</dimen>
 
