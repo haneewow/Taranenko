@@ -5,5 +5,4 @@ import com.example.sirius.domain.model.data.Result
 
 interface DeveloperNoteRepository {
     suspend fun loadNote(number: Int): Result<DeveloperNote?>
-    suspend fun clearData()
 }

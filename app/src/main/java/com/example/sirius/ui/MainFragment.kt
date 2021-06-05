@@ -24,7 +24,9 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
 
     private val binding: FragmentMainBinding by viewBinding()
 
-    private var number = 1
+    private var currentNote: DeveloperNote? = null
+
+    private var bottomSheetListener: OnFragmentInteractionListener? = null
 
     private val notesObserver = Observer<Result<DeveloperNote?>> { result ->
         when (result) {
@@ -41,20 +43,25 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
     }
 
     private val nextStepListener = View.OnClickListener {
-        number++
-        viewModel.loadNotes(number)
+        viewModel.loadNotes(true)
     }
 
     private val previousStepListener = View.OnClickListener {
-        number--
-        viewModel.loadNotes(number)
+        viewModel.loadNotes(false)
+    }
+
+    private val infoClickListener = View.OnClickListener {
+        val bundle = Bundle().apply {
+            putSerializable(BUNDLE_NOTE_KEY, currentNote)
+        }
+
+        bottomSheetListener?.sendNote(bundle)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         initEventListener()
-        viewModel.loadNotes(number)
     }
 
     override fun onDestroy() {
@@ -70,6 +77,8 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
     private fun initEventListener() = with(binding) {
         nextPost.setOnClickListener(nextStepListener)
         previousPost.setOnClickListener(previousStepListener)
+        info.setOnClickListener(infoClickListener)
+        bottomSheetListener = requireContext() as OnFragmentInteractionListener
     }
 
     private fun handleSuccessLoadingNotes(developerNote: DeveloperNote) = with(binding) {
@@ -80,16 +89,26 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
             .into(image)
 
         description.text = developerNote.description
+        currentNote = developerNote
         showLoading(false)
     }
 
     private fun handleFailedLoadingNotes(msg: String?, code: Int?) {
         val message = msg ?: getString(R.string.default_msg_error)
-        showError(message) { viewModel.loadNotes(number++) }
+        showError(message) { viewModel.loadNotes() }
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
         progressBar.setVisibility(isLoading)
         image.setVisibility(isLoading.not())
+        info.setVisibility(isLoading.not())
+    }
+
+    companion object {
+        const val BUNDLE_NOTE_KEY = "note_key"
+    }
+
+    fun interface OnFragmentInteractionListener {
+        fun sendNote(bundle: Bundle)
     }
 }

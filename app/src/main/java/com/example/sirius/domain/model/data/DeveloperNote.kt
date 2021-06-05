@@ -3,6 +3,7 @@ package com.example.sirius.domain.model.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity
 data class DeveloperNote(
@@ -42,4 +43,4 @@ data class DeveloperNote(
     @SerializedName("canVote")
     val isCanVote: Boolean,
     var numberPage: Int
-)
+): Serializable

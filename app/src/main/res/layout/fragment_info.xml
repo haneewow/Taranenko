@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/normal_space">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/authorImg"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_profile"
+        android:tint="@color/secondaryVariant"
+        android:layout_marginEnd="@dimen/small_space"
+        app:layout_constraintEnd_toStartOf="@id/authorName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/authorName"
+        style="@style/Base.Appearance.Text.Author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Haneewow" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/likeImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        tools:src="@drawable/ic_like"
+        android:tint="@color/secondaryVariant"
+        android:layout_marginEnd="@dimen/small_space"
+        app:layout_constraintEnd_toStartOf="@id/likeCount"
+        app:layout_constraintTop_toTopOf="@id/likeCount" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/likeCount"
+        style="@style/Base.Appearance.Text.Author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/authorName"
+        app:layout_constraintTop_toBottomOf="@id/authorImg"
+        tools:text="139" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date"
+        style="@style/Base.Appearance.Text.Author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/likeCount"
+        app:layout_constraintTop_toBottomOf="@id/likeCount"
+        tools:text="06 june 2021" />
+</androidx.constraintlayout.widget.ConstraintLayout>
