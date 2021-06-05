@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_space">8dp</dimen>
+    <dimen name="normal_space">16dp</dimen>
+    <dimen name="big_space">32dp</dimen>
+
+    <dimen name="card_height">400dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
+
+    <dimen name="circle_button_size">70dp</dimen>
+    <dimen name="circle_button_radius">36dp</dimen>
+    <dimen name="circle_button_elevation">10dp</dimen>
+</resources>
