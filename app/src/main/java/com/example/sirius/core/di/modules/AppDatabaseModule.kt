@@ -14,4 +14,8 @@ class AppDatabaseModule {
     fun provideDatabase(app: Application): AppDatabase = Room
         .databaseBuilder(app, AppDatabase::class.java, AppDatabase.DB_NAME)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideDao(db: AppDatabase) = db.appDao()
 }
