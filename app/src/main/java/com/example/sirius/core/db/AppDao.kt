@@ -13,7 +13,4 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveNote(note: DeveloperNote)
-
-    @Query("DELETE FROM DeveloperNote")
-    suspend fun clear()
 }

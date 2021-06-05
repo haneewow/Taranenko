@@ -33,8 +33,6 @@ class DeveloperRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun clearData() = dao.clear()
-
     private suspend fun getNotesFromApi(number: Int): Result<DeveloperNote?> {
         val randomPage = Random.nextInt(1, 100)
         val result = handler.handleResponse(api.getNotes(randomPage), number)

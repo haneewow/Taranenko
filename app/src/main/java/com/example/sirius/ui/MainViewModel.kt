@@ -1,12 +1,13 @@
 package com.example.sirius.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sirius.domain.model.SessionInfo
 import com.example.sirius.domain.model.data.DeveloperNote
 import com.example.sirius.domain.model.data.Result
-import com.example.sirius.domain.model.usecase.interfaces.ClearDataUseCase
 import com.example.sirius.domain.model.usecase.interfaces.GetNoteUseCase
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collect
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val getNoteUseCase: GetNoteUseCase,
-    private val clearDataUseCase: ClearDataUseCase
+    private val sessionInfo: SessionInfo
 ) : ViewModel() {
     private val _notes = MutableLiveData<Result<DeveloperNote?>>()
     val notes: LiveData<Result<DeveloperNote?>> get() = _notes
@@ -23,17 +24,34 @@ class MainViewModel @Inject constructor(
     private val _buttonEnabled = MutableLiveData(false)
     val buttonEnabled: LiveData<Boolean> get() = _buttonEnabled
 
-    fun loadNotes(number: Int) = viewModelScope.launch(IO) {
-        getNoteUseCase.invoke(number)
+    private var number: Int
+        get() = sessionInfo.pageNumber
+        set(value) {
+            sessionInfo.pageNumber = value
+        }
+
+    init {
+        loadNotes()
+    }
+
+    fun loadNotes(isNextPage: Boolean? = null) = viewModelScope.launch(IO) {
+        val numberPage = getCurrentPage(isNextPage)
+        Log.d("TEST", "Будет загружена страница номер" + numberPage)
+        getNoteUseCase.invoke(numberPage)
             .collect {
                 _notes.postValue(it)
-                if (number == FIRST_PAGE) _buttonEnabled.postValue(false)
+                if (numberPage == FIRST_PAGE) _buttonEnabled.postValue(false)
                 else _buttonEnabled.postValue(true)
             }
     }
 
     fun clearData() = viewModelScope.launch(IO) {
-        clearDataUseCase.invoke()
+        sessionInfo.logout()
+    }
+
+    private fun getCurrentPage(isNextPage: Boolean?): Int {
+        isNextPage ?: return number
+        return if (isNextPage) ++number else --number
     }
 
     companion object {

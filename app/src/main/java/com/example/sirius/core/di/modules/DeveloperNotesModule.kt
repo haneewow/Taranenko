@@ -2,9 +2,7 @@ package com.example.sirius.core.di.modules
 
 import com.example.sirius.domain.model.handler.ResponseHandler
 import com.example.sirius.domain.model.handler.impl.ResponseHandlerImpl
-import com.example.sirius.domain.model.usecase.impl.ClearDataUseCaseImpl
 import com.example.sirius.domain.model.usecase.impl.GetNoteUseCaseImpl
-import com.example.sirius.domain.model.usecase.interfaces.ClearDataUseCase
 import com.example.sirius.domain.model.usecase.interfaces.GetNoteUseCase
 import com.example.sirius.domain.repository.DeveloperNoteRepository
 import com.example.sirius.domain.repository.impl.DeveloperRepositoryImpl
@@ -26,7 +24,4 @@ interface DeveloperNotesModule {
     @Singleton
     fun bindGetNoteUseCase(useCaseImpl: GetNoteUseCaseImpl): GetNoteUseCase
 
-    @Binds
-    @Singleton
-    fun bindClearDataUseCase(useCase: ClearDataUseCaseImpl): ClearDataUseCase
 }
