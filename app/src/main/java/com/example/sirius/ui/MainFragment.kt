@@ -44,7 +44,6 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
 
     private val previousEnableObserver = Observer<Boolean> {
         binding.previousPost.setVisibility(it)
-        binding.garbage.setVisibility(it)
     }
 
     private val nextStepListener = View.OnClickListener {
