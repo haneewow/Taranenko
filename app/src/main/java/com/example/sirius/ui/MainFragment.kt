@@ -15,6 +15,7 @@ import com.example.sirius.databinding.FragmentMainBinding
 import com.example.sirius.domain.model.data.DeveloperNote
 import com.example.sirius.domain.model.data.Result
 import com.example.sirius.util.setVisibility
+import com.example.sirius.util.showAlert
 import com.example.sirius.util.showError
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -43,6 +44,7 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
 
     private val previousEnableObserver = Observer<Boolean> {
         binding.previousPost.setVisibility(it)
+        binding.garbage.setVisibility(it)
     }
 
     private val nextStepListener = View.OnClickListener {
@@ -51,6 +53,15 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
 
     private val previousStepListener = View.OnClickListener {
         viewModel.loadNotes(false)
+    }
+
+    private val clearDataListener = View.OnClickListener {
+        showAlert(
+            message = getString(R.string.clear_data_msg),
+            positiveAction = getString(R.string.button_ok) to { viewModel.clearData() },
+            negativeAction = getString(R.string.button_cancel) to {},
+            cancelable = true
+        )
     }
 
     private val infoClickListener = View.OnClickListener {
@@ -66,11 +77,6 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
         initEventListener()
     }
 
-    override fun onDestroy() {
-        viewModel.clearData()
-        super.onDestroy()
-    }
-
     private fun initObservers() = with(viewModel) {
         notes.observe(viewLifecycleOwner, notesObserver)
         buttonEnabled.observe(viewLifecycleOwner, previousEnableObserver)
@@ -80,6 +86,7 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
         nextPost.setOnClickListener(nextStepListener)
         previousPost.setOnClickListener(previousStepListener)
         info.setOnClickListener(infoClickListener)
+        garbage.setOnClickListener(clearDataListener)
         bottomSheetListener = requireContext() as OnFragmentInteractionListener
     }
 
@@ -88,7 +95,6 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
             .asGif()
             .apply(getRequestOptions())
             .load(developerNote.gifUrl)
-            .placeholder(R.drawable.bkg_rounded)
             .into(image)
 
         description.text = developerNote.description
@@ -105,7 +111,7 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
-        progressBar.setVisibility(isLoading)
+        image.setVisibility(isLoading.not())
         info.setVisibility(isLoading.not())
     }
 

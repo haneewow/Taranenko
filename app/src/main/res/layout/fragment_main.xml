@@ -5,16 +5,25 @@
     android:id="@+id/root_cont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@drawable/bkg_main"
-    android:padding="@dimen/normal_space"
-    android:animateLayoutChanges="true">
+    android:padding="@dimen/normal_space">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_height"
-        android:background="@drawable/bkg_rounded"
         android:elevation="@dimen/card_elevation"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageHolder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height"
+        android:background="@drawable/bkg_rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +35,7 @@
         android:background="@color/white"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/imageHolder" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/authorName"
@@ -56,46 +65,40 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/previousPost"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="@dimen/circle_button_size"
-        android:layout_height="@dimen/circle_button_size"
-        android:layout_margin="@dimen/normal_space"
-        android:backgroundTint="@color/white"
-        app:cornerRadius="@dimen/circle_button_radius"
+        style="@style/Base.CircleButton.Big"
         app:icon="@drawable/arrow_back"
-        app:iconTint="@color/accent"
         app:layout_constraintBottom_toTopOf="@id/separator"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/imageHolder" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/nextPost"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="@dimen/circle_button_size"
-        android:layout_height="@dimen/circle_button_size"
-        android:layout_margin="@dimen/normal_space"
-        android:backgroundTint="@color/white"
-        app:cornerRadius="@dimen/circle_button_radius"
-        app:icon="@drawable/arrow_next"
-        app:iconGravity="end"
-        app:iconTint="@color/accent"
+        android:id="@+id/garbage"
+        style="@style/Base.CircleButton.Small"
+        android:layout_marginStart="@dimen/normal_space"
+        app:icon="@drawable/ic_garbage"
+        app:iconSize="26dp"
         app:layout_constraintBottom_toTopOf="@id/separator"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageHolder" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/info"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@android:color/transparent"
-        app:icon="@drawable/ic_info"
-        app:iconGravity="start"
-        app:iconSize="25dp"
-        app:iconTint="@color/primary"
+        style="@style/Base.CircleButton.Small"
         android:layout_marginEnd="@dimen/normal_space"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:icon="@drawable/ic_info"
+        app:iconSize="43dp"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageHolder" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextPost"
+        style="@style/Base.CircleButton.Big"
+        app:icon="@drawable/arrow_next"
+        app:iconGravity="end"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/imageHolder" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -109,7 +112,6 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:elevation="2dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

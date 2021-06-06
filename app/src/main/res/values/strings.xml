@@ -3,4 +3,7 @@
     <string name="default_msg_error">При обработке данных возникла ошибка.</string>
     <string name="default_action">Обновить</string>
     <string name="author_title">Автор:</string>
+    <string name="button_ok">ОК</string>
+    <string name="button_cancel">Позже</string>
+    <string name="clear_data_msg">Очистить сохраненные данные?</string>
 </resources>

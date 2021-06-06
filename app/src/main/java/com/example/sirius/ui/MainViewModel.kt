@@ -43,8 +43,11 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    fun clearData() = viewModelScope.launch(IO) {
-        sessionInfo.logout()
+    fun clearData() {
+        viewModelScope.launch(IO) {
+            sessionInfo.logout()
+            loadNotes()
+        }
     }
 
     private fun getCurrentPage(isNextPage: Boolean?): Int {
