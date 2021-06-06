@@ -49,7 +49,8 @@ class InfoBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun getVoteDrawable(): Drawable? {
-        val resId = if (note.votes >= 0) R.drawable.ic_like
+        val countVotes = note.votes ?: DEFAULT_VOTES
+        val resId = if (countVotes >= DEFAULT_VOTES) R.drawable.ic_like
         else R.drawable.ic_dislike
 
         return ContextCompat.getDrawable(requireActivity(), resId)
@@ -60,5 +61,7 @@ class InfoBottomSheetFragment : BottomSheetDialogFragment() {
         fun newInstance(bundle: Bundle) = InfoBottomSheetFragment().apply {
             arguments = bundle
         }
+
+        private const val DEFAULT_VOTES = 0
     }
 }

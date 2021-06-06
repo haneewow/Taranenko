@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.Sirius" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/secondaryVariant</item>
-        <item name="colorPrimaryVariant">@color/secondaryVariant</item>
-        <item name="colorOnPrimary">@color/secondaryVariant</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/darkPrimary</item>
+        <item name="colorOnPrimary">@color/primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryVariant</item>
-        <item name="colorSecondaryVariant">@color/secondaryVariant</item>
+        <item name="colorSecondary">@color/darkPrimary</item>
+        <item name="colorSecondaryVariant">@color/darkPrimary</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

@@ -1,6 +1,5 @@
 package com.example.sirius.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +35,6 @@ class MainViewModel @Inject constructor(
 
     fun loadNotes(isNextPage: Boolean? = null) = viewModelScope.launch(IO) {
         val numberPage = getCurrentPage(isNextPage)
-        Log.d("TEST", "Будет загружена страница номер" + numberPage)
         getNoteUseCase.invoke(numberPage)
             .collect {
                 _notes.postValue(it)

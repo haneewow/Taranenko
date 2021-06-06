@@ -9,7 +9,6 @@ import com.example.sirius.domain.model.handler.ResponseHandler
 import com.example.sirius.domain.repository.DeveloperNoteRepository
 import retrofit2.HttpException
 import javax.inject.Inject
-import kotlin.random.Random
 
 class DeveloperRepositoryImpl @Inject constructor(
     private val api: ApiService,
@@ -34,8 +33,7 @@ class DeveloperRepositoryImpl @Inject constructor(
     }
 
     private suspend fun getNotesFromApi(number: Int): Result<DeveloperNote?> {
-        val randomPage = Random.nextInt(1, 100)
-        val result = handler.handleResponse(api.getNotes(randomPage), number)
+        val result = handler.handleResponse(api.getNotes(), number)
         saveResult(result)
         return result
     }
