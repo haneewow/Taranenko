@@ -6,7 +6,7 @@
 
     <dimen name="card_height">400dp</dimen>
     <dimen name="card_width">300dp</dimen>
-    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">36dp</dimen>
 
     <dimen name="circle_button_size">70dp</dimen>

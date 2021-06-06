@@ -6,6 +6,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.sirius.R
 import com.example.sirius.core.di.factory.ViewModelFactory
 import com.example.sirius.databinding.FragmentMainBinding
@@ -33,13 +36,13 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
             is Result.Success -> result.data?.let {
                 handleSuccessLoadingNotes(it)
             }
-            is Result.Failure -> handleFailedLoadingNotes(result.msg, result.code)
+            is Result.Failure -> handleFailedLoadingNotes(result.msg)
             is Result.Loading -> showLoading(true)
         }
     }
 
     private val previousEnableObserver = Observer<Boolean> {
-        binding.previousPost.isEnabled = it
+        binding.previousPost.setVisibility(it)
     }
 
     private val nextStepListener = View.OnClickListener {
@@ -51,11 +54,10 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
     }
 
     private val infoClickListener = View.OnClickListener {
-        val bundle = Bundle().apply {
-            putSerializable(BUNDLE_NOTE_KEY, currentNote)
-        }
-
-        bottomSheetListener?.sendNote(bundle)
+        currentNote?.let {
+            val bundle = Bundle().apply { putSerializable(BUNDLE_NOTE_KEY, currentNote) }
+            bottomSheetListener?.sendNote(bundle)
+        } ?: handleFailedLoadingNotes(null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,31 +86,50 @@ class MainFragment : DaggerFragment(R.layout.fragment_main) {
     private fun handleSuccessLoadingNotes(developerNote: DeveloperNote) = with(binding) {
         Glide.with(requireContext())
             .asGif()
+            .apply(getRequestOptions())
             .load(developerNote.gifUrl)
-            .centerCrop()
+            .placeholder(R.drawable.bkg_rounded)
             .into(image)
 
         description.text = developerNote.description
+        authorName.text = developerNote.authorName
         currentNote = developerNote
         showLoading(false)
     }
 
-    private fun handleFailedLoadingNotes(msg: String?, code: Int?) {
-        val message = msg ?: getString(R.string.default_msg_error)
+    private fun handleFailedLoadingNotes(msg: String?) {
+        val defaultMsg = getString(R.string.default_msg_error)
+        val message = msg ?: defaultMsg
+        binding.description.text = defaultMsg
         showError(message) { viewModel.loadNotes() }
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
         progressBar.setVisibility(isLoading)
-        image.setVisibility(isLoading.not())
         info.setVisibility(isLoading.not())
     }
 
-    companion object {
-        const val BUNDLE_NOTE_KEY = "note_key"
+    private fun getRequestOptions() = RequestOptions().apply {
+        val corners = getCornerRadius()
+        transforms(
+            CenterCrop(),
+            GranularRoundedCorners(
+                corners, corners, 0.0F, 0.0F
+            )
+        )
     }
 
-    fun interface OnFragmentInteractionListener {
+    private fun getCornerRadius(): Float {
+        val density = resources.displayMetrics.density
+        return CORNER_RADIUS * density
+    }
+
+    interface OnFragmentInteractionListener {
         fun sendNote(bundle: Bundle)
+    }
+
+    companion object {
+        private const val CORNER_RADIUS = 16
+        const val BUNDLE_NOTE_KEY = "note_key"
     }
 }

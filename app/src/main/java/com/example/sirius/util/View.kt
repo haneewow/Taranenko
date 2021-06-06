@@ -13,6 +13,6 @@ fun Fragment.showError(message: String, action: () -> Unit) = view?.let {
     Snackbar
         .make(it, message, Snackbar.LENGTH_INDEFINITE)
         .setAction(getString(R.string.default_action)) { action() }
-        .setActionTextColor(requireContext().getColor(R.color.secondaryVariant))
+        .setActionTextColor(requireContext().getColor(R.color.primary))
         .show()
 }

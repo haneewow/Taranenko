@@ -2,61 +2,57 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_cont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grayLight"
+    android:background="@drawable/bkg_main"
     android:padding="@dimen/normal_space"
-    android:id="@+id/root_cont">
+    android:animateLayoutChanges="true">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/container"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_height"
-        android:layout_marginTop="@dimen/big_space"
-        android:padding="@dimen/normal_space"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/card_elevation"
+        android:background="@drawable/bkg_rounded"
+        android:elevation="@dimen/card_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:visibility="visible" />
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/card_height"
-            android:visibility="invisible"
-            tools:src="@drawable/ic_launcher_foreground" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/authorName"
+        style="@style/Base.Appearance.Text.Author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/big_space"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator"
+        tools:text="Haneewow" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/normal_space"
-            android:src="@drawable/ic_info"
-            android:visibility="invisible" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/description"
-            style="@style/Base.Appearance.Text.Description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/normal_space"
-            android:gravity="center"
-            android:shadowColor="@color/shadow"
-            android:shadowDy="3"
-            android:shadowRadius="6"
-            tools:text="Это просто текст" />
-
-    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/description"
+        style="@style/Base.Appearance.Text.Description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authorName"
+        tools:text="Это просто текст" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/previousPost"
@@ -67,9 +63,10 @@
         android:backgroundTint="@color/white"
         app:cornerRadius="@dimen/circle_button_radius"
         app:icon="@drawable/arrow_back"
-        app:iconTint="@color/secondaryVariant"
+        app:iconTint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@id/separator"
         app:layout_constraintEnd_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/container" />
+        app:layout_constraintTop_toBottomOf="@id/image" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextPost"
@@ -81,9 +78,24 @@
         app:cornerRadius="@dimen/circle_button_radius"
         app:icon="@drawable/arrow_next"
         app:iconGravity="end"
-        app:iconTint="@color/secondaryVariant"
+        app:iconTint="@color/accent"
+        app:layout_constraintBottom_toTopOf="@id/separator"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/container" />
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/info"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@android:color/transparent"
+        app:icon="@drawable/ic_info"
+        app:iconGravity="start"
+        app:iconSize="25dp"
+        app:iconTint="@color/primary"
+        android:layout_marginEnd="@dimen/normal_space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -91,5 +103,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:elevation="2dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

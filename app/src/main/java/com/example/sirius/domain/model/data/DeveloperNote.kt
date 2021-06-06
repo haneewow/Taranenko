@@ -11,36 +11,36 @@ data class DeveloperNote(
     @SerializedName("id")
     val id: Int,
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("votes")
-    val votes: Int,
+    val votes: Int?,
     @SerializedName("author")
-    val authorName: String,
+    val authorName: String?,
     @SerializedName("date")
     val date: String,
     @SerializedName("gifURL")
-    val gifUrl: String,
+    val gifUrl: String?,
     @SerializedName("previewURL")
-    val previewUrl: String,
+    val previewUrl: String?,
     @SerializedName("gifSize")
-    val gifSize: Long,
+    val gifSize: Long?,
     @SerializedName("videoURL")
-    val videoUrl: String,
+    val videoUrl: String?,
     @SerializedName("videoPath")
-    val videoPath: String,
+    val videoPath: String?,
     @SerializedName("videoSize")
-    val videoSize: Long,
+    val videoSize: Long?,
     @SerializedName("type")
-    val type: String,
+    val type: String?,
     @SerializedName("width")
-    val width: String,
+    val width: String?,
     @SerializedName("height")
-    val height: String,
+    val height: String?,
     @SerializedName("commentsCount")
-    val commentsCount: Long,
+    val commentsCount: Long?,
     @SerializedName("fileSize")
-    val fileSize: Long,
+    val fileSize: Long?,
     @SerializedName("canVote")
-    val isCanVote: Boolean,
+    val isCanVote: Boolean?,
     var numberPage: Int
 ): Serializable
