@@ -1,11 +1,11 @@
 package com.example.sirius.core.di.modules
 
-import com.example.sirius.ui.MainFragment
+import com.example.sirius.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class FragmentModule {
+abstract class ActivityModule {
     @ContributesAndroidInjector
-    internal abstract fun contributeMainFragment(): MainFragment
+    internal abstract fun contributeMainActivity(): MainActivity
 }

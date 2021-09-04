@@ -19,7 +19,7 @@ class SessionInfo @Inject constructor(
         get() = sessionInfo.getInt(NUMBER_PAGE_KEY, FIRST_PAGE)
         set(value) = sessionInfo.edit { putInt(NUMBER_PAGE_KEY, value) }
 
-    fun logout() = CoroutineScope(IO).launch {
+    fun logout() {
         sessionInfo.edit { clear() }
         database.clearAllTables()
     }

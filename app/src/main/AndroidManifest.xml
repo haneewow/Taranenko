@@ -13,7 +13,7 @@
         android:name=".MainApplication"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Sirius">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
