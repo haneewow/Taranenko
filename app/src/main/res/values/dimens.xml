@@ -13,4 +13,6 @@
     <dimen name="circle_button_size_small">36dp</dimen>
     <dimen name="circle_button_radius">36dp</dimen>
     <dimen name="circle_button_elevation">10dp</dimen>
+
+    <dimen name="icon_size">20dp</dimen>
 </resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="@dimen/card_elevation"
+        app:layout_constraintBottom_toTopOf="@id/cardHelper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/grayLight"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/authorName"
+        style="@style/Base.Appearance.Text.Author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grayLight"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator"
+        tools:text="Haneewow" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/description"
+        style="@style/Base.Appearance.Text.Description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/grayLight"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authorName"
+        tools:text="Это просто текст" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/previousPost"
+        style="@style/Base.CircleButton.Big"
+        app:icon="@drawable/arrow_back"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintEnd_toEndOf="@id/centerHelper"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/garbage"
+        style="@style/Base.CircleButton.Small"
+        android:layout_marginStart="@dimen/normal_space"
+        app:icon="@drawable/ic_garbage"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/info"
+        style="@style/Base.CircleButton.Small"
+        android:layout_marginEnd="@dimen/normal_space"
+        app:icon="@drawable/ic_info"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextPost"
+        style="@style/Base.CircleButton.Big"
+        app:icon="@drawable/arrow_next"
+        app:iconGravity="end"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        app:layout_constraintStart_toStartOf="@id/centerHelper"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centerHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/cardHelper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+</androidx.constraintlayout.widget.ConstraintLayout>

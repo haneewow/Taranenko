@@ -12,7 +12,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="2dp"
         android:src="@drawable/ic_profile"
-        android:tint="@color/accent"
+        android:tint="@color/primaryDark"
         android:layout_marginEnd="@dimen/small_space"
         app:layout_constraintEnd_toStartOf="@id/authorName"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
         tools:src="@drawable/ic_like"
-        android:tint="@color/accent"
+        android:tint="@color/primaryDark"
         android:layout_marginEnd="@dimen/small_space"
         app:layout_constraintEnd_toStartOf="@id/likeCount"
         app:layout_constraintTop_toTopOf="@id/likeCount" />

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0.75"
+                app:framePosition="45"
+                app:motionTarget="@+id/infoContent" />
+        </KeyFrameSet>
+    </Transition>
+    <ConstraintSet android:id="@+id/start"></ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@id/cardHelper"
+            app:layout_constraintGuide_percent="0.5" />
+    </ConstraintSet>
+</MotionScene>
