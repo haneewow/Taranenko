@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sirius</string>
+    <string name="app_name">GifGallery</string>
     <string name="default_msg_error">При обработке данных возникла ошибка.</string>
     <string name="default_action">Обновить</string>
     <string name="author_title">Автор:</string>
