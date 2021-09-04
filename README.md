@@ -2,7 +2,5 @@
 
 *This app using: mvvm, flow, usecase, dagger2, room, viewbinding*
 
-todo: Bottom navigation for categories, add unit-tests
+todo: add unit-tests, using pagination
 
-![First screen](https://i.ibb.co/3vh8FVL/Screenshot-1630773915.png)
-![Second screen](https://i.ibb.co/0JgLMY5/Screenshot-1630773918.png)
