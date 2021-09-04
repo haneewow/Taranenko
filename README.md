@@ -4,5 +4,5 @@
 
 todo: Bottom navigation for categories, add unit-tests
 
-![First screen](https://i.ibb.co/0JgLMY5/Screenshot-1630773918.png)
+![First screen](https://i.ibb.co/3vh8FVL/Screenshot-1630773915.png)
 ![Second screen](https://i.ibb.co/0JgLMY5/Screenshot-1630773918.png)
