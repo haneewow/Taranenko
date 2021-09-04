@@ -1,4 +1,4 @@
-#  Demo app for Sirius-Android
+#  Demo app Android
 
 *This app using: mvvm, flow, usecase, dagger2, room, viewbinding*
 
