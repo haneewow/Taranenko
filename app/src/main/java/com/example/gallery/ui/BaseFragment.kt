@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.gallery.R
 import com.example.gallery.domain.model.data.DeveloperNote
+import com.example.gallery.util.setVisibility
 import com.example.gallery.util.showError
 import dagger.android.support.DaggerFragment
 
@@ -28,19 +30,24 @@ open class BaseFragment(layoutId: Int) : DaggerFragment(layoutId) {
         currentNote?.let {
             val bundle = Bundle().apply { putSerializable(BUNDLE_NOTE_KEY, currentNote) }
             bottomSheetListener?.sendNote(bundle)
-        } ?: handleFailedLoadingNotes(null, null)
+        } ?: handleFailedLoadingNotes()
     }
 
-    protected fun handleFailedLoadingNotes(msg: String?, view: View?) {
+    protected fun handleFailedLoadingNotes(
+        msg: String? = null,
+        image: ImageView? = null,
+        errorHolder: TextView? = null
+    ) {
         val defaultMsg = getString(R.string.default_msg_error)
         val message = msg ?: defaultMsg
 
-        view?.setBackgroundDrawable(
+        image?.setBackgroundDrawable(
             ContextCompat.getDrawable(
                 requireContext(),
                 R.drawable.error_placeholder
             )
         )
+        errorHolder?.setVisibility(true)
         showError(message)
     }
 

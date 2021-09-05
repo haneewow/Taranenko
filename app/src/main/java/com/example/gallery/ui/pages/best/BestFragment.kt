@@ -36,7 +36,7 @@ class BestFragment : BaseFragment(R.layout.fragment_best) {
     private val notesObserver = Observer<Result<DeveloperNote?>> {
         it.handleResult(
             successDelegate = ::handleSuccessLoadingNotes,
-            failureDelegate = { handleFailedLoadingNotes(it, binding.image) },
+            failureDelegate = { handleFailedLoadingNotes(it, binding.image, binding.errorHolder) },
             loadingDelegate = { showLoading(true) }
         )
     }
@@ -108,7 +108,7 @@ class BestFragment : BaseFragment(R.layout.fragment_best) {
 
     private fun handleSuccessLoadingNotes(developerNote: DeveloperNote?) = with(binding) {
         developerNote ?: return@with
-
+        errorHolder.setVisibility(false)
         Glide.with(requireContext())
             .asGif()
             .centerCrop()

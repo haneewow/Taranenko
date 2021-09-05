@@ -2,11 +2,8 @@ package com.example.gallery.ui.pages.latest
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -23,8 +20,6 @@ import com.example.gallery.ui.BaseFragment
 import com.example.gallery.ui.adapter.Category
 import com.example.gallery.util.setVisibility
 import com.example.gallery.util.showAlert
-import com.example.gallery.util.showError
-import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class LatestFragment : BaseFragment(R.layout.fragment_latest) {
@@ -38,7 +33,7 @@ class LatestFragment : BaseFragment(R.layout.fragment_latest) {
     private val notesObserver = Observer<Result<DeveloperNote?>> {
         it.handleResult(
             successDelegate = ::handleSuccessLoadingNotes,
-            failureDelegate = { handleFailedLoadingNotes(it, binding.image) },
+            failureDelegate = { handleFailedLoadingNotes(it, binding.image, binding.errorHolder) },
             loadingDelegate = { showLoading(true) }
         )
     }
@@ -110,6 +105,7 @@ class LatestFragment : BaseFragment(R.layout.fragment_latest) {
 
     private fun handleSuccessLoadingNotes(developerNote: DeveloperNote?) = with(binding) {
         developerNote ?: return@with
+        errorHolder.setVisibility(false)
         Glide.with(requireContext())
             .asGif()
             .centerCrop()
