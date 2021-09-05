@@ -27,7 +27,6 @@
     <style name="Base.CircleButton.Big">
         <item name="android:layout_width">@dimen/circle_button_size</item>
         <item name="android:layout_height">@dimen/circle_button_size</item>
-        <item name="android:layout_margin">@dimen/normal_space</item>
         <item name="android:backgroundTint">@color/white</item>
         <item name="cornerRadius">@dimen/circle_button_radius</item>
         <item name="iconTint">@color/accent</item>

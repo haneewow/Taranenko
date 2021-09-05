@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_info.xml" value="0.28306159420289856" />
-        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_main.xml" value="0.22" />
-        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/xml/main_scene.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/drawable/bkg_rounded.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/activity_main.xml" value="0.24320652173913043" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_best.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_hot.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_info.xml" value="0.24320652173913043" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_latest.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/79058/StudioProjects/Taranenko/app/src/main/res/layout/fragment_main.xml" value="0.24320652173913043" />
       </map>
     </option>
   </component>

@@ -2,8 +2,9 @@ package com.example.sirius.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.lifecycle.Observer
@@ -44,13 +45,12 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
         }
     }
 
-
     private val transitionListener = object : TransitionAdapter() {
         override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
             when (currentId) {
-                R.id.offScreenLike -> {
+                R.id.offScreenNext -> {
                     binding.motionLayout.progress = 0f
-                    binding.motionLayout.setTransition(R.id.rest, R.id.like)
+                    binding.motionLayout.setTransition(R.id.rest, R.id.next)
                     viewModel.loadNotes(true)
                 }
             }
@@ -83,66 +83,37 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
 
     private fun handleSuccessLoadingNotes(stack: DeveloperStack) = with(binding) {
         when (stack.top) {
-            is Result.Success -> {
-                Glide.with(this@MainActivity)
-                    .asGif()
-                    .apply(getRequestOptions())
-                    .placeholder(circularProgressDrawable)
-                    .load(stack.top.data?.gifUrl)
-                    .into(imageHolder)
-                authorName.text = stack.top.data?.authorName
-            }
-            else -> {
-            }
+            is Result.Success -> doWhenResultIsSuccess(stack.top.data, authorName, imageHolder)
+            is Result.Failure -> handleFailedLoadingNotes(stack.top.msg, authorName)
         }
 
         when (stack.bottom) {
-            is Result.Success -> {
-                Glide.with(this@MainActivity)
-                    .asGif()
-                    .apply(getRequestOptions())
-                    .load(stack.bottom.data?.gifUrl)
-                    .into(bottomHolder)
-                bottomAuthor.text = stack.bottom.data?.authorName
-            }
-            else -> {
-            }
+            is Result.Success -> doWhenResultIsSuccess(
+                stack.bottom.data,
+                bottomAuthor,
+                bottomHolder
+            )
+            is Result.Failure -> handleFailedLoadingNotes(stack.bottom.msg, bottomAuthor)
         }
-        showLoading(false)
     }
 
-    private fun handleFailedLoadingNotes(msg: String?) {
+    private fun handleFailedLoadingNotes(msg: String?, view: TextView) {
         val defaultMsg = getString(R.string.default_msg_error)
         val message = msg ?: defaultMsg
-        //  binding.description.text = defaultMsg
+        view.text = message
     }
 
-    private fun showLoading(isLoading: Boolean) = with(binding) {
-        /*   image.setVisibility(isLoading.not())
-           info.setVisibility(isLoading.not())*/
-    }
-
-    private fun getRequestOptions() = RequestOptions().apply {
-        val corners = getCornerRadius()
-        transforms(
-            CenterCrop(),
-            GranularRoundedCorners(
-                corners, corners, 0.0F, 0.0F
-            )
-        )
-    }
-
-    private fun getCornerRadius(): Float {
-        val density = resources.displayMetrics.density
-        return CORNER_RADIUS * density
-    }
-
-    interface OnFragmentInteractionListener {
-        fun sendNote(bundle: Bundle)
-    }
-
-    companion object {
-        private const val CORNER_RADIUS = 16
-        const val BUNDLE_NOTE_KEY = "note_key"
+    private fun doWhenResultIsSuccess(
+        note: DeveloperNote?,
+        authorView: TextView,
+        imageView: ImageView
+    ) {
+        Glide.with(this@MainActivity)
+            .asGif()
+            .centerCrop()
+            .placeholder(circularProgressDrawable)
+            .load(note?.gifUrl)
+            .into(imageView)
+        authorView.text = note?.authorName
     }
 }
